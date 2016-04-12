@@ -1,0 +1,21 @@
+{
+  "name": "placesbot",
+  "version": "0.0.1",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "botkit": "0.0.15",
+    "botkit-middleware-witai": "0.0.2",
+    "dotenv": "^2.0.0",
+    "googlemaps": "^1.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.7.0",
+    "nodemon": "^1.9.1"
+  }
+}
