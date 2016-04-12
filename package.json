@@ -4,15 +4,15 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --harmony ./bot.js",
+    "dev": "nodemon --harmony ./bot.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "botkit": "0.0.15",
-    "botkit-middleware-witai": "0.0.2",
-    "dotenv": "^2.0.0",
-    "googlemaps": "^1.4.0"
+    "dotenv": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^2.7.0",
