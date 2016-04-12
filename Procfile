@@ -1,1 +1,1 @@
-chatbot: npm start
+worker: npm start
