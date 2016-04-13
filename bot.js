@@ -27,13 +27,10 @@ controller.middleware.receive.use(wit.receive);
 var outcomes = require('./outcomes')
 var max = (arr) => arr.reduce(((max, current) => max > current ? max : current), null)
 
-controller.hears(['^.*$'], ['direct_message', 'direct_mention', 'mention', 'channel', wit.hears], (bot, message) => {
-  var outcome = max(message.intents || [])
-  if(outcome && outcome.confidence > 0.5) return bot.startConversation(message, confirmOutcome(bot, outcome))
-  bot.reply(message, "Sorry, but I didn't understand that. Would you like to buy a mountain lion?")
-})
+var performIntentFor = (outcome) => (response, convo) => outcomes.intent(outcome)(response, convo)
 
-confirmOutcome = (bot, outcome) => (response, convo) => {
+var confirmOutcome = (bot, outcome) => (response, convo) => {
+  if(outcomes.skipConfirmation(outcome)) return performIntentFor(outcome)(response, convo)
   var outcomeText = outcomes.description(outcome)
   convo.ask(`Ok, you want to ${outcomeText}. Is that right?`, [{
     pattern: bot.utterances.yes,
@@ -50,4 +47,9 @@ confirmOutcome = (bot, outcome) => (response, convo) => {
   convo.next()
 }
 
-performIntentFor = (outcome) => (response, convo) => outcomes.intent(outcome)(response, convo)
+controller.hears(['^.*$'], ['direct_message', 'direct_mention', 'mention', 'channel', wit.hears], (bot, message) => {
+  var outcome = max(message.intents || [])
+  if(outcome && outcome.confidence > 0.5) return bot.startConversation(message, confirmOutcome(bot, outcome))
+  bot.reply(message, "Sorry, but did you say you'd like to buy a mountain lion?")
+})
+
