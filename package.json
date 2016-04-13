@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "botkit": "0.0.15",
+    "botkit-middleware-witai": "0.0.2",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "googlemaps": "^1.4.0"
