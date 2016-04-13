@@ -5,4 +5,7 @@ server.get('/', (req, res) => {
   res.send('Paintbot live here')
 })
 
-exports.start = () => server.listen(process.env.PORT)
+exports.start = () => {
+  server.listen(process.env.PORT || 3000)
+  console.log("SERVER RUNNING")
+}
