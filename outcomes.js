@@ -1,9 +1,5 @@
 var locaterService = require('./locater_service')
 
-var descriptions = {
-  findPainter: "find a painter"
-}
-
 var outcomes = {
   findPainter: {
     call: locaterService('painter'),
@@ -14,26 +10,38 @@ var outcomes = {
     description: 'find a plumber'
   },
   findChineseFood: {
-    call: locaterService('chinese food')
+    call: locaterService('chinese food'),
     description: 'find some oh-so-delicious chinese food'
   },
   hello: {
     call: (response, convo) => {
-      convo.say('Greeting, and salutations!')
+      greetings = [
+        'Hi there.',
+        'Greetings and salutations!',
+        'Bom dia',
+        'Bonjour',
+        'Buongiorno',
+        'Aloha',
+        'Yo.'
+      ]
+      random = (new Date).getMilliseconds() % greetings.length
+      convo.say(greetings[random])
       convo.next()
     },
     description: 'say hello',
-    skipConfirmation: false
+    skipConfirmation: true
   }
 }
 
 camelize = (str) => str.replace(/[\W_]+(\w)/g, ($0, $1) => $1.toUpperCase())
 
+var getOutcomeProp = (outcome, prop) => {
+  var ref = outcomes[camelize(outcome.intent)]
+  return (ref && ref[prop])
+}
+
 module.exports = {
-  intent: (outcome) => {
-    var ref = outcomes[camelize(outcome.intent)]
-    return (ref && ref.call)
-  },
-  description: (outcome) => outcomes[camelize(outcome.intent)].description,
-  skipConfirmation: () => false
+  intent: (outcome) => getOutcomeProp(outcome, 'call'),
+  description: (outcome) => getOutcomeProp(outcome, 'description'),
+  skipConfirmation: (outcome) => getOutcomeProp(outcome, 'skipConfirmation')
 }
