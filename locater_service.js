@@ -15,7 +15,9 @@ var getLocation = (response, convo, callback) => {
         var address = result.results[0].formatted_address
         callback(err, lat, lon)
       } catch(e) {
-        callback('No info available', null, null, null, result)
+        convo.say("Sorry, I didn't get that.")
+        convo.repeat()
+        convo.next()
       }
     })
   })

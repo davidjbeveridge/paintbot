@@ -30,6 +30,25 @@ var outcomes = {
     },
     description: 'say hello',
     skipConfirmation: true
+  },
+  mountainLion: {
+    call: (response, convo) => {
+      delaySay = (timeout, msg) => {
+        setTimeout(() => {
+          console.log(msg)
+          convo.next()
+          convo.say(msg)
+          convo.next()
+        }, timeout)
+      }
+      convo.say("Ok... looking for mountain lions now...")
+      delaySay(1000, '...')
+      delaySay(2000, '...')
+      delaySay(3000, '...')
+      delaySay(4000, 'Say, is this legal?...')
+      delaySay(5000, "I think I'm going to have to pass on this. You can deal with the EPA yourself.")
+    },
+    description: 'buy a mountain lion'
   }
 }
 

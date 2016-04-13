@@ -50,6 +50,6 @@ var confirmOutcome = (bot, outcome) => (response, convo) => {
 controller.hears(['^.*$'], ['direct_message', 'direct_mention', 'mention', 'channel', wit.hears], (bot, message) => {
   var outcome = max(message.intents || [])
   if(outcome && outcome.confidence > 0.5) return bot.startConversation(message, confirmOutcome(bot, outcome))
-  bot.reply(message, "Sorry, but did you say you'd like to buy a mountain lion?")
+  bot.startConversation(message, confirmOutcome(bot, {intent: 'mountain_lion'}))
 })
 
