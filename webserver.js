@@ -2,7 +2,7 @@ var express = require('express')
 var server = express();
 
 server.get('/', (req, res) => {
-  res.send('Paintbot live here')
+  res.send('Paintbot lives here. Just talk to @paintbot on slack.')
 })
 
 exports.start = () => {
