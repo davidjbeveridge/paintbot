@@ -33,8 +33,12 @@ controller.hears(['^.*paint.*$'], ['direct_message', 'direct_mention', 'mention'
   bot.reply(message, "Sorry, but I didn't understand that.")
 })
 
-controller.hears('Where do you live?' ['direct_message', 'direct_mention', 'mention', 'channel'], (bot, message) => {
+controller.hears('^where.*you$' ['direct_message', 'direct_mention', 'mention', 'channel'], (bot, message) => {
   bot.reply(message, `My hostname is ${process.env.HOSTNAME}.`)
+})
+
+controller.hears('^.*$', ['direct_message', 'direct_mention', 'mention', 'channel'], (bot, message) => {
+  bot.reply(message, "Sorry, I didn't understand that. Would you like to buy a Mountain Lion?")
 })
 
 confirmOutcome = (bot, outcome) => (response, convo) => {
