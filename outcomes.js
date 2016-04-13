@@ -2,6 +2,8 @@ var locaterService = require('./locater_service')
 
 var intents = {
   findPainter: locaterService('painter')
+  findPlumber: locaterService('plumber')
+  findChineseFood: locaterService('chinese food')
 }
 
 var descriptions = {
