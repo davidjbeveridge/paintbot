@@ -57,13 +57,15 @@ var tellResults = (convo, status, places) => {
   convo.next()
 }
 
+var locaterService = (searchTerm) => (response, convo) => {
+  getLocation(response, convo, (err, lat, lon, address) => {
+    handleError(err, convo, "Sorry, but I couldn't locate that.") || placesLookup(lat, lon, address, searchTerm, (err, status, places) => {
+      handleError(err, convo, "Sorry, but I couldn't find any results in your area.") || tellResults(convo, status, places) })
+  })
+}
+
 var intents = {
-  findPainter: (response, convo) => {
-    getLocation(response, convo, (err, lat, lon, address) => {
-      handleError(err, convo, "Sorry, but I couldn't locate that.") || placesLookup(lat, lon, address, 'painter', (err, status, places) => {
-        handleError(err, convo, "Sorry, but I couldn't find any results in your area.") || tellResults(convo, status, places) })
-    })
-  }
+  findPainter: locaterService('painter')
 }
 
 var descriptions = {
