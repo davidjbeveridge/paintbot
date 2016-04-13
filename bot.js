@@ -33,6 +33,10 @@ controller.hears(['^.*paint.*$'], ['direct_message', 'direct_mention', 'mention'
   bot.reply(message, "Sorry, but I didn't understand that.")
 })
 
+controller.hears('Where do you live?' ['direct_message', 'direct_mention', 'mention', 'channel'], (bot, message) => {
+  bot.reply(message, `My hostname is ${process.env.HOSTNAME}.`)
+})
+
 confirmOutcome = (bot, outcome) => (response, convo) => {
   var outcomeText = outcomes.description(outcome)
   convo.ask(`Ok, you want to ${outcomeText}. Is that right?`, [{
