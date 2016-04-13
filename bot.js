@@ -27,18 +27,10 @@ controller.middleware.receive.use(wit.receive);
 var outcomes = require('./outcomes')
 var max = (arr) => arr.reduce(((max, current) => max > current ? max : current), null)
 
-controller.hears(['^.*paint.*$'], ['direct_message', 'direct_mention', 'mention', 'channel', wit.hears], (bot, message) => {
+controller.hears(['^.*$'], ['direct_message', 'direct_mention', 'mention', 'channel', wit.hears], (bot, message) => {
   var outcome = max(message.intents || [])
   if(outcome && outcome.confidence > 0.5) return bot.startConversation(message, confirmOutcome(bot, outcome))
-  bot.reply(message, "Sorry, but I didn't understand that.")
-})
-
-controller.hears('^where.*you$' ['direct_message', 'direct_mention', 'mention', 'channel'], (bot, message) => {
-  bot.reply(message, `My hostname is ${process.env.HOSTNAME}.`)
-})
-
-controller.hears('^.*$', ['direct_message', 'direct_mention', 'mention', 'channel'], (bot, message) => {
-  bot.reply(message, "Sorry, I didn't understand that. Would you like to buy a Mountain Lion?")
+  bot.reply(message, "Sorry, but I didn't understand that. Would you like to buy a mountain lion?")
 })
 
 confirmOutcome = (bot, outcome) => (response, convo) => {
