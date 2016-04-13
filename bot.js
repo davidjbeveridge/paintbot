@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+require('./webserver').start()
+
 var SLACK_API_TOKEN = process.env.SLACK_API_TOKEN
 var WIT_TOKEN = process.env.WIT_TOKEN
 var Botkit = require('botkit')
